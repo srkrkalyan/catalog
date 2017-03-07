@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="static/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+	<div class = "container">
+			<div class = "row title">
+				<div class = "col-md-6"> 
+					<h1>Restaurant Menu Application</h1>
+				</div>
+					<div class = "col-md-4 text-right">
+						<a href="{{ url_for('newRestaurant') }}">Create a new restaurant</a>
+					</div>
+					<div class = "col-md-4 text-right">
+						<a href="{{ url_for('gdisconnect') }}">Logout</a>
+					</div>
+			</div>
+			<div class = "row">
+				<div class = "col-md-12">
+					<hr>
+				</div>
+			</div>
+			{% if restaurants %}
+			{% for each in restaurants %}
+				<div class = "row restaurant">
+					<div class = "col-md-6">
+						<h3>
+							<a href="{{url_for('restaurantMenu', restaurant_id = each.id)}}">{{each.name}}</a>
+						</h3>
+					</div>
+					<div class = "col-md-3">
+						<h5>
+							<a href="{{url_for('editRestaurant',restaurant_id = each.id)}}">Edit</a>
+						</h5>					
+					</div>
+					<div class = "col-md-3">
+						<h5>
+							<a href="{{url_for('deleteRestaurant',restaurant_id = each.id)}}">Delete</a>
+						</h5>
+					</div>
+				</div>
+			{% endfor %}
+			{% endif %}
+	</div>
+</body>
+</html>
+

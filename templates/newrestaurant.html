@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="static/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="static/style.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class = "row">
+				<div class = "col-md-6">
+					<h2>Add New Restaurant</h2>
+				</div>
+				<div class = "col-md-6 text-right">
+					<a href="{{ url_for('homePage') }}">Home Page</a>
+				</div>
+			</div>
+			<br>
+			<form action = "" method = "POST">
+				<div class="form-group">
+					<label for="new_restaurant_name">Restaurant Name</label>
+					<input type="text" name="new_restaurant_name">
+					<input type="Submit">
+			</form>
+		</div>
+	</body>
+</html>
