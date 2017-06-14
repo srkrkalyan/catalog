@@ -69,7 +69,7 @@ class MenuItem(Base):
         }
 
 
-engine = create_engine('sqlite:///restaurantmenuwithusers.db')
+engine = create_engine('postgresql://grader:grader@localhost:5432/catalogdb')
 
 print 'table creation successful !'
 

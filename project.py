@@ -13,14 +13,17 @@ import json
 from flask import make_response
 import requests
 from functools import wraps
+import psycopg2
 
 # Reading client id issued by google oAuth
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/home/grader/udacity_projects/catalog/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Restaurant Menu Application"
 
 # Bindings for database engine
-engine = create_engine('sqlite:///restaurantmenuwithusers.db')
+#engine = create_engine('sqlite:///restaurantmenuwithusers.db')
+
+engine = create_engine('postgresql://grader:grader@localhost:5432/catalogdb')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -60,7 +63,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/home/grader/udacity_projects/catalog/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -411,9 +414,9 @@ def deleteMenuItem(restaurant_id, menu_id):
             return render_template("deletemenuitem.html",
                                    restaurant_id=restaurant_id,
                                    itemname=menuName, menu_id=menu_id)
-
+app.secret_key = 'very_fishy'
 
 if __name__ == '__main__':
-    app.secret_key = 'mantrala_marri_chettu'
+    #app.secret_key = 'mantrala_marri_chettu'
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
